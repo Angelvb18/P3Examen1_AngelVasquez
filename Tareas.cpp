@@ -31,5 +31,5 @@ void Tareas::setNivel(){
 }
 void Tareas::setCarga(){
 	cout << "Ingrese Carga:";
-	cin >> nivel;
+	cin >> carga;
 }

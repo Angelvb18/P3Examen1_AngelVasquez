@@ -5,17 +5,21 @@
 using namespace std;
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 void listarEmpleado(vector<Empleado*>);
+double calculoN(vector<Tareas*>);
 void menu( vector<Empleado*>& , vector<Tareas*>& ,int&);
 void listarTareas(vector<Tareas*>);
 int main() {
 	vector <Empleado*> listaEmpleados;
     vector <Tareas*> backlog;
     int incioproyecto = 0;
+    double N;
     while(incioproyecto != 7){
     	if(incioproyecto == 0){
     		menu(listaEmpleados,backlog,incioproyecto);
 		}else{
 			
+			N = calculoN(backlog);
+			break;
 		}
 	}
     
@@ -26,7 +30,7 @@ int main() {
 void menu(vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& incioproyecto){	
      
 	int op;
-	do{
+	
 		cout << "1. Contratar Empleado\n2. Despedir Empleado\n3. Listar Empleados\n4. Crear Tarea\n5. Listar Tareas\n6. Iniciar proyecto\n7. Salir\n:";
 		cin >> op;
 		switch(op){
@@ -95,7 +99,6 @@ void menu(vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& incio
 				break;
 			}
 		}
-	}while(op!=7);
 }
 void listarEmpleado(vector<Empleado*>lista){
 	for(int i = 0 ; i < lista.size() ; i++){
@@ -106,5 +109,13 @@ void listarTareas(vector<Tareas*>lista){
 	for(int i = 0 ; i < lista.size() ; i++){
 		cout <<i<<"."<< lista[i]->getDescipcion() << " Nivel:"<< lista[i]->getNivel() << " Carga:"<< lista[i]->getCarga()<< endl;
 	}
+}
+double calculoN(vector<Tareas*>lista){
+	int carga=0;
+	for(int i = 0 ; i < lista.size() ; i++){
+		carga+=lista[i]->getCarga();
+	}
+	cout << "sdsd" << carga << endl;
+	return carga+carga*0.20;
 }
 
