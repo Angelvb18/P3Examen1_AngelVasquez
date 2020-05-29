@@ -26,7 +26,7 @@ class Empleado
 		string toString();
 		Tareas* getTarea();
 		void setTarea(Tareas*);
-		bool haceonolatarea();
+		int haceonolatarea();
 	protected:
 };
 

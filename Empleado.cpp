@@ -66,14 +66,19 @@ void Empleado::setTarea(Tareas* t){
 	delete tarea;
 	tarea = t;
 }
-bool Empleado::haceonolatarea(){
-	bool siono= false;
+int  Empleado::haceonolatarea(){
+	int siono= 0;
 	int pereza = rand() % 101;
 	if(ppereza < pereza){
 		int habilidad = rand()  % 101;
 		if(phabilidad >= habilidad){
-			siono = true;
+			siono = 3 ;
 		}
+		else{
+			siono = 2;
+		}
+	}else{
+		return 1;
 	}
 	return siono;
 }

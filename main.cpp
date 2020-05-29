@@ -4,17 +4,17 @@
 #include <vector>
 using namespace std;
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
-void menu( vector<Empleado*>& , vector<Tareas*>& ,int&, double&);
-void menu2( vector<Empleado*>& , vector<Tareas*>& ,double&);
+void menu( vector<Empleado*>& , vector<Tareas*>& ,int&, int&);
+void menu2( vector<Empleado*>& , vector<Tareas*>& ,int&);
 void listarEmpleado(vector<Empleado*>);
-double calculoN(vector<Tareas*>);
+int calculoN(vector<Tareas*>);
 
 void listarTareas(vector<Tareas*>);
 int main() {
 	vector <Empleado*> listaEmpleados;
     vector <Tareas*> backlog;
     int incioproyecto = 0;
-    double N=0.0;
+    int N=0;
     while(incioproyecto != 7){
     	if(incioproyecto == 0){
 				menu(listaEmpleados,backlog,incioproyecto,N);
@@ -27,7 +27,7 @@ int main() {
 	return 0;
 }
 
-void menu(vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& incioproyecto,double& N){	
+void menu(vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& incioproyecto,int& N){	
      
 	int op;
 	
@@ -111,7 +111,7 @@ void listarTareas(vector<Tareas*>lista){
 		cout <<i<<"."<< lista[i]->getDescipcion() << " Nivel:"<< lista[i]->getNivel() << " Carga:"<< lista[i]->getCarga()<< endl;
 	}
 }
-double calculoN(vector<Tareas*>lista){
+int calculoN(vector<Tareas*>lista){
 	int carga=0;
 	for(int i = 0 ; i < lista.size() ; i++){
 		carga+=lista[i]->getCarga();
@@ -119,45 +119,72 @@ double calculoN(vector<Tareas*>lista){
 	cout << "sdsd" << carga << endl;
 	return carga+carga*0.20;
 }
-void menu2( vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,double& N){
+void menu2( vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& N){
+	int peresoso = 0, fallo = 0 , logro = 0;
 	int op;
-	cout << "1. Siguiente día\n2. Generar reporte\n3. Salir\n:";
-	cin >> op;
-	switch(op){
-		case 1:{
-			for(int i = 0 ; i<listaEmpleados.size() ; i++){
-				for(int j = 0 ; j < backlog.size() ; j++){
-					if(listaEmpleados[i] ->getNivel() >= backlog[j]->getNivel() && listaEmpleados[i] ->getTarea() == NULL){
-						listaEmpleados[i] ->setTarea(backlog[j]);
-						backlog.erase(backlog.begin() + j);
+	do{
+		cout << "1. Siguiente día\n2. Generar reporte\n3. Salir\n:";
+		cin >> op;
+		switch(op){
+			case 1:{
+				peresoso = 0, fallo = 0 , logro = 0;
+				for(int i = 0 ; i<listaEmpleados.size() ; i++){
+					for(int j = 0 ; j < backlog.size() ; j++){
+						if(listaEmpleados[i] ->getNivel() >= backlog[j]->getNivel() && listaEmpleados[i] ->getTarea() == NULL){
+							listaEmpleados[i] ->setTarea(backlog[j]);
+							backlog.erase(backlog.begin() + j);
+						}
 					}
 				}
-			}
-			for(int i = 0 ; i<listaEmpleados.size() ; i++){
-				if(listaEmpleados[i]->haceonolatarea()){
-					Tareas* t = listaEmpleados[i]->getTarea();
-					t->setCarga(t->getCarga()-1);
-					if(t->getCarga() == 0 ){
-						listaEmpleados[i]->setTarea(NULL);
+				for(int i = 0 ; i<listaEmpleados.size() ; i++){
+					int condicion = listaEmpleados[i]->haceonolatarea();
+					if(condicion == 3){
+						Tareas* t = listaEmpleados[i]->getTarea();
+						t->setCarga(t->getCarga()-1);
+						if(t->getCarga() == 0 ){
+							listaEmpleados[i]->setTarea(NULL);
+						}
+						else{
+							listaEmpleados[i]->setTarea(t);
+						}
+						logro++;
 					}
-					else{
-						listaEmpleados[i]->setTarea(t);
+					if(condicion == 2){
+						fallo++;
+					}
+					if(condicion == 1){
+						peresoso++;
+					}
+						
+					
+				}
+				break;
+			}
+			case 2:{
+				cout << "Tareas en el backlog :" << backlog.size() <<endl;
+				int cont = 0;
+				for(int i = 0 ; i < listaEmpleados.size() ; i++){
+					if(listaEmpleados[i]->getTarea() != NULL){
+						cont++;
 					}
 					
 				}
+				cout << "Tareas en Progreso:" << cont << endl;
+				cout << "Empleados Peresosos:"  << peresoso << endl;
+				cout << "Empleados Fallaron:" << fallo << endl;
+				cout << "Empleados que Lograron el dia :"<< logro << endl;
+				cout << endl;
+				cout << "Dias para terminar el proyecto:" << N << endl;
+				break;
 			}
-			
-			break;
+			case 3:{
+				cout << "Adios" << endl;
+				break;
+			}
 		}
-		case 2:{
-			
-			break;
-		}
-		case 3:{
-			cout << "Adios";
-			break;
-		}
-	}
+	    N--;
+	}while(op != 3 || N != 0);
+	
 	
 }
 
