@@ -1,5 +1,6 @@
 #include "Empleado.h"
-
+#include <stdlib.h>
+#include <time.h>
 Empleado::Empleado()
 {
 	setNombre();
@@ -57,4 +58,22 @@ void Empleado::setNombre(){
 }
 string Empleado::toString(){
 	return nombre;
+}
+Tareas* Empleado::getTarea(){
+	return tarea;
+}
+void Empleado::setTarea(Tareas* t){
+	delete tarea;
+	tarea = t;
+}
+bool Empleado::haceonolatarea(){
+	bool siono= false;
+	int pereza = rand() % 101;
+	if(ppereza < pereza){
+		int habilidad = rand()  % 101;
+		if(phabilidad >= habilidad){
+			siono = true;
+		}
+	}
+	return siono;
 }

@@ -1,9 +1,6 @@
+#include "Tareas.h"
 #include <iostream>
-#include<string>
-using  std:: cout;
-using  std::cin;
-using  std::endl;
-using  std::string;
+using namespace std;
 #ifndef EMPLEADO_H
 #define EMPLEADO_H
 
@@ -12,6 +9,7 @@ class Empleado
 	private:
 		string nombre;
 		int edad , nivel , phabilidad , ppereza;
+		Tareas*  tarea = NULL;
 	public:
 		 Empleado();
 		~Empleado();
@@ -26,7 +24,9 @@ class Empleado
 		void setPereza();
 		void setNombre();
 		string toString();
-		
+		Tareas* getTarea();
+		void setTarea(Tareas*);
+		bool haceonolatarea();
 	protected:
 };
 

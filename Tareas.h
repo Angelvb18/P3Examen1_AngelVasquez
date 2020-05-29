@@ -20,6 +20,7 @@ class Tareas
 		void setDescipcion();
 		void setNivel();
 		void setCarga();
+		void setCarga(int);
 	protected:
 };
 

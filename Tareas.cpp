@@ -33,3 +33,6 @@ void Tareas::setCarga(){
 	cout << "Ingrese Carga:";
 	cin >> carga;
 }
+void Tareas::setCarga(int c){
+	carga = c;
+}
