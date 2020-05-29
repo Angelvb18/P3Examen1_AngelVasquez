@@ -1,5 +1,8 @@
 #include <iostream>
-using namespace std;
+using  std:: cout;
+using  std::cin;
+using  std::endl;
+using  std::string;
 #ifndef TAREAS_H
 #define TAREAS_H
 

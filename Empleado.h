@@ -1,5 +1,9 @@
 #include <iostream>
-using namespace std;
+#include<string>
+using  std:: cout;
+using  std::cin;
+using  std::endl;
+using  std::string;
 #ifndef EMPLEADO_H
 #define EMPLEADO_H
 

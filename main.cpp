@@ -5,16 +5,26 @@
 using namespace std;
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 void listarEmpleado(vector<Empleado*>);
-void menu();
+void menu( vector<Empleado*>& , vector<Tareas*>& ,int&);
 void listarTareas(vector<Tareas*>);
 int main() {
-	menu();
+	vector <Empleado*> listaEmpleados;
+    vector <Tareas*> backlog;
+    int incioproyecto = 0;
+    while(incioproyecto != 7){
+    	if(incioproyecto == 0){
+    		menu(listaEmpleados,backlog,incioproyecto);
+		}else{
+			
+		}
+	}
+    
+	
 	return 0;
 }
 
-void menu(){	
-     vector <Empleado*> listaEmpleados;
-     vector <Tareas*> backlog;
+void menu(vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& incioproyecto){	
+     
 	int op;
 	do{
 		cout << "1. Contratar Empleado\n2. Despedir Empleado\n3. Listar Empleados\n4. Crear Tarea\n5. Listar Tareas\n6. Iniciar proyecto\n7. Salir\n:";
@@ -51,7 +61,12 @@ void menu(){
 				break;
 			}
 			case 4:{
-				backlog.push_back(new Tareas());
+				if(incioproyecto == 1){
+					cout << "No se puede agregar mas tareas ya que se incio el proyecto" << endl;
+				}else{
+					backlog.push_back(new Tareas());
+				}
+				
 				break;
 			}
 			case 5:{
@@ -63,10 +78,14 @@ void menu(){
 				break;
 			}
 			case 6:{
+				if(incioproyecto == 0){
+					incioproyecto = 1;
+				}
 				
 				break;
 			}
 			case 7:{
+				incioproyecto = 7;
 				cout << "Adios" << endl;
 				break;
 			}
