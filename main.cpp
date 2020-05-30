@@ -20,7 +20,9 @@ int main() {
 				menu(listaEmpleados,backlog,incioproyecto,N);
 		}else{
 			  	menu2(listaEmpleados,backlog,N);
+			  	incioproyecto = 0;
 		}
+		
 	}
     
 	
@@ -116,11 +118,10 @@ int calculoN(vector<Tareas*>lista){
 	for(int i = 0 ; i < lista.size() ; i++){
 		carga+=lista[i]->getCarga();
 	}
-	cout << "sdsd" << carga << endl;
 	return carga+carga*0.20;
 }
 void menu2( vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& N){
-	int peresoso = 0, fallo = 0 , logro = 0;
+	int peresoso = 0, fallo = 0 , logro = 0, cont = 0;
 	int op;
 	do{
 		cout << "1. Siguiente día\n2. Generar reporte\n3. Salir\n:";
@@ -140,7 +141,9 @@ void menu2( vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& N){
 					int condicion = listaEmpleados[i]->haceonolatarea();
 					if(condicion == 3){
 						Tareas* t = listaEmpleados[i]->getTarea();
+						cout << t->getCarga()<< endl;
 						t->setCarga(t->getCarga()-1);
+						cout << t->getCarga()<< endl;
 						if(t->getCarga() == 0 ){
 							listaEmpleados[i]->setTarea(NULL);
 						}
@@ -158,16 +161,17 @@ void menu2( vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& N){
 						
 					
 				}
+				N--;
 				break;
 			}
 			case 2:{
+				
 				cout << "Tareas en el backlog :" << backlog.size() <<endl;
-				int cont = 0;
+			cont = 0;
 				for(int i = 0 ; i < listaEmpleados.size() ; i++){
 					if(listaEmpleados[i]->getTarea() != NULL){
 						cont++;
 					}
-					
 				}
 				cout << "Tareas en Progreso:" << cont << endl;
 				cout << "Empleados Peresosos:"  << peresoso << endl;
@@ -182,8 +186,8 @@ void menu2( vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& N){
 				break;
 			}
 		}
-	    N--;
-	}while(op != 3 || N != 0);
+	    
+	}while(op != 3 || N != 0  && backlog.size() != 0 && cont != 0 );
 	
 	
 }

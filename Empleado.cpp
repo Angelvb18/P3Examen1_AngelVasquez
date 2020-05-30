@@ -63,8 +63,14 @@ Tareas* Empleado::getTarea(){
 	return tarea;
 }
 void Empleado::setTarea(Tareas* t){
-	delete tarea;
-	tarea = t;
+	if(t != NULL){
+		delete tarea;
+		tarea = t;
+		
+	}else{
+		tarea = NULL;
+	}
+	
 }
 int  Empleado::haceonolatarea(){
 	int siono= 0;
