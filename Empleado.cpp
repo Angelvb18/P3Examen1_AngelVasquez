@@ -64,11 +64,9 @@ Tareas* Empleado::getTarea(){
 }
 void Empleado::setTarea(Tareas* t){
 	if(t != NULL){
-		delete tarea;
 		tarea = t;
-		
 	}else{
-		tarea = NULL;
+		delete tarea;
 	}
 	
 }

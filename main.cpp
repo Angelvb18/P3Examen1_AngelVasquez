@@ -138,16 +138,19 @@ void menu2( vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& N){
 					}
 				}
 				for(int i = 0 ; i<listaEmpleados.size() ; i++){
-					int condicion = listaEmpleados[i]->haceonolatarea();
-					if(condicion == 3){
+					int condicion =-1;
+					if(listaEmpleados[i] !=NULL){
+						condicion= listaEmpleados[i]->haceonolatarea();
+					}
+					if(condicion == 3  ){
 						Tareas* t = listaEmpleados[i]->getTarea();
-						cout << t->getCarga()<< endl;
-						t->setCarga(t->getCarga()-1);
-						cout << t->getCarga()<< endl;
+						int as= t->getCarga();
+						t->setCarga(as-1);
 						if(t->getCarga() == 0 ){
 							listaEmpleados[i]->setTarea(NULL);
 						}
 						else{
+							
 							listaEmpleados[i]->setTarea(t);
 						}
 						logro++;
@@ -187,7 +190,7 @@ void menu2( vector<Empleado*>& listaEmpleados, vector<Tareas*>& backlog,int& N){
 			}
 		}
 	    
-	}while(op != 3 || N != 0  && backlog.size() != 0 && cont != 0 );
+	}while(op != 3 || backlog.size() != 0 && cont != 0 );
 	
 	
 }
